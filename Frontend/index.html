@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-translate-customization" content="9f841e7780177523-3214ceb76f765f38-gc38c6fe6f9d06436-c">
+    <title>BrillX</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="#" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="styles/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="styles/style.css" rel="stylesheet">
+   
+    <style>
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            position: relative;
+            z-index: 10000;
+            min-width: 400px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
+        /* Carousel Fix */
+        .header-carousel .owl-item img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .header-carousel .owl-item img {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<body>
+<body>
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0" style="display:flex; justify-content:space-between; align-items:center;">
+    <!-- Logo (Left) -->
+    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5" style="flex-shrink:0;">
+      <p class="m-0 fw-bold" style="font-size:25px; display:flex; align-items:center; justify-content:flex-start; gap:8px; margin:0;">
+        <img src="images/brillx-logo.png" alt="BrillX Logo" height="50px" style="vertical-align:middle;">
+      </p>
+    </a>
+
+    <!-- Navbar Toggle (Mobile) -->
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links (Right) -->
+    <div class="collapse navbar-collapse" id="navbarCollapse" style="flex-grow:1;">
+      <div class="navbar-nav ms-auto p-4 p-lg-0" style="margin-left:auto;">
+        <a href="index.html" class="nav-item nav-link active">Home</a>
+        <a href="#" class="nav-item nav-link">About</a>
+        <a href="#" class="nav-item nav-link">Features</a>
+        <a href="#" class="nav-item nav-link login">Login</a>
+        <a href="#" class="nav-item nav-link signup">Signup</a>
+      </div>
+    </div>
+  </nav>
+</body>
+
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0 mb-4">
+        <div class="owl-carousel header-carousel position-relative">
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="images/home1.png" alt="AI-Powered Learning Platform">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+                    style="background: rgba(24, 29, 56, .7);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-sm-10 col-lg-8">
+                                <h5 class="text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">AI-Powered Learning Platform</h5>
+                                <h1 class="display-3 text-white animated slideInDown">Revolutionize Your Learning Experience with BrillX</h1>
+                                <p class="text-white mb-4 pb-2">Experience personalized education powered by AI algorithms that adapt to your learning style, pace, and preferences.</p>
+                                <a href="#"
+                                    class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Learn More</a>
+                                <a href="#" class="btn btn-light py-md-3 px-md-5 animated slideInRight signup">Get Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="images/home2.png" alt="Intelligent Knowledge Extraction">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
+                    style="background: rgba(24, 29, 56, .7);">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-sm-10 col-lg-8">
+                                <h5 class="text-uppercase mb-3 animated slideInDown" style="color: #fb873f;">Welcome to BrillX</h5>
+                                <h1 class="display-3 text-white animated slideInDown">Intelligent Knowledge Extraction & Personalized Learning</h1>
+                                <p class="text-white mb-4 pb-2">Transform any PDF into interactive learning materials with our advanced AI technology and personalized learning paths.</p>
+                                <a href="#"
+                                    class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Discover Features</a>
+                                <a href="#" class="btn btn-light py-md-3 px-md-5 animated slideInRight signup">Join Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+     <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-2 text-center">
+                <div class="col-12 wow fadeInUp" data-wow-delay="0.3s">
+                    <h1 style="color: #3f61fb;">Transform Your Learning Journey with BrillX</h1>
+                    <p class="mb-5">Experience the future of education with AI-powered personalized learning and intelligent content extraction.</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item text-center pt-3 shadow">
+                        <div class="p-4">
+                            <img src="images/icon1.png" alt="" width="60px" class="mb-4">
+                            <h5 class="mb-3">Learn Anything</h5>
+                            <p>Explore any interest or trending topic, take prerequisites, and advance your skills with our comprehensive learning platform.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item text-center pt-3 shadow">
+                        <div class="p-4">
+                            <img src="images/aitutor.png" alt="" width="60px" class="mb-4">
+                            <h5 class="mb-3">Personalized Education</h5>
+                            <p>Use AI algorithms to adapt learning materials to user preferences, skills, and pace for optimal learning outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item text-center pt-3 shadow">
+                        <div class="p-4">
+                            <img src="images/icon3.png" alt="" width="60px" class="mb-4">
+                            <h5 class="mb-3">Knowledge Extraction</h5>
+                            <p>Intelligent knowledge extraction from PDFs transforms static documents into interactive learning experiences.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="img-fluid position-absolute w-100 h-100" src="images/asd.png" alt=""
+                            style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <h6 class="section-title bg-white text-start pe-3">About Us</h6>
+                    <h1 class="mb-4" style="color: #3f61fb;">Welcome to BrillX</h1>
+                    <p class="mb-4">At BrillX, we're revolutionizing education through artificial intelligence and personalized learning experiences. Our platform adapts to your unique learning style, pace, and preferences to deliver optimal educational outcomes.</p>
+                    <p class="mb-4">BrillX combines cutting-edge AI technology with educational expertise to create a learning environment that grows with you. Our intelligent algorithms analyze your progress, identify knowledge gaps, and curate content specifically designed to maximize your learning potential.</p>
+                    <div class="row gy-2 gx-4 mb-4">
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right  me-2"></i>AI-Powered Personalization</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Intelligent Content Extraction</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Adaptive Learning Paths</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Real-time Progress Tracking</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Smart Knowledge Assessment</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Personalized Recommendations</p>
+                        </div>
+                    </div>
+                    <a class="btn text-light py-3 px-5 mt-2" href="#">Discover More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+    
+
+<!-- Courses Start -->
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+      <h6 class="section-title bg-white text-center px-3">Popular Courses</h6>
+      <h1 class="mb-5" style="color: #3f61fb;">AI-Powered Learning Experiences</h1>
+    </div>
+
+<!-- Courses Section -->
+<div class="container" style="padding: 20px 0;">
+
+  <!-- Courses Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;">
+
+    <!-- Course 1: Web Development -->
+    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      <div style="position: absolute; top: 16px; right: 16px; background: linear-gradient(135deg,#3a86ff,#2563eb); color: white; padding: 6px 12px; border-radius: 50px; font-size: 12px; font-weight: 600;">
+        Featured
+      </div>
+
+      <div style="width: 100%; height: 200px; overflow: hidden;">
+        <img src="images/web-dev.jpg" alt="Web Development" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+
+      <div style="padding: 20px;">
+        <span style="display: inline-block; background: #dbeafe; color: #2563eb; padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600;">Web Development</span>
+        <h3 style="font-size: 18px; font-weight: 700; margin: 10px 0;">Full-Stack Web Development</h3>
+        <p style="color: #64748b; font-size: 14px;">Master modern web development with HTML, CSS, JavaScript, React, Node.js, and databases.</p>
+
+        <div style="margin-top: 15px;">
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Skills you'll gain:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <span style="background: #eff6ff; color: #2563eb; padding: 3px 8px; border-radius: 50px; font-size: 11px;">HTML5</span>
+            <span style="background: #eff6ff; color: #2563eb; padding: 3px 8px; border-radius: 50px; font-size: 11px;">CSS3</span>
+            <span style="background: #eff6ff; color: #2563eb; padding: 3px 8px; border-radius: 50px; font-size: 11px;">JavaScript</span>
+            <span style="background: #eff6ff; color: #2563eb; padding: 3px 8px; border-radius: 50px; font-size: 11px;">React</span>
+            <span style="background: #eff6ff; color: #2563eb; padding: 3px 8px; border-radius: 50px; font-size: 11px;">Node.js</span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <div style="color: #f59e0b;">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <span style="font-weight: 600; font-size: 13px;">4.5</span>
+            <span style="color: #64748b; font-size: 13px;">(1,243)</span>
+          </div>
+          <div style="color: #64748b; font-size: 13px;">
+            <i class="far fa-clock"></i> 8-10 weeks
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course 2: Data Analysis -->
+    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      <div style="width: 100%; height: 200px; overflow: hidden;">
+        <img src="images/Data-Analysis.jpg" alt="Data Analysis" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+
+      <div style="padding: 20px;">
+        <span style="display: inline-block; background: #d1fae5; color: #059669; padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600;">Data Science</span>
+        <h3 style="font-size: 18px; font-weight: 700; margin: 10px 0;">Data Analysis with Python</h3>
+        <p style="color: #64748b; font-size: 14px;">Learn to analyze and visualize data using Python, Pandas, NumPy, and Matplotlib.</p>
+
+        <div style="margin-top: 15px;">
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Skills you'll gain:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <span style="background: #ecfdf5; color: #059669; padding: 3px 8px; border-radius: 50px; font-size: 11px;">Python</span>
+            <span style="background: #ecfdf5; color: #059669; padding: 3px 8px; border-radius: 50px; font-size: 11px;">Pandas</span>
+            <span style="background: #ecfdf5; color: #059669; padding: 3px 8px; border-radius: 50px; font-size: 11px;">Data Visualization</span>
+            <span style="background: #ecfdf5; color: #059669; padding: 3px 8px; border-radius: 50px; font-size: 11px;">Statistical Analysis</span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <div style="color: #f59e0b;">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+            </div>
+            <span style="font-weight: 600; font-size: 13px;">4.0</span>
+            <span style="color: #64748b; font-size: 13px;">(892)</span>
+          </div>
+          <div style="color: #64748b; font-size: 13px;">
+            <i class="far fa-clock"></i> 6-8 weeks
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course 3: Machine Learning -->
+    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      <div style="width: 100%; height: 200px; overflow: hidden;">
+        <img src="images/Introduction-To-Machine-Learning-1.jpg" alt="Machine Learning" style="width: 100%; height: 100%; object-fit: cover;">
+      </div>
+
+      <div style="padding: 20px;">
+        <span style="display: inline-block; background: #e0f2fe; color: #0284c7; padding: 4px 10px; border-radius: 50px; font-size: 11px; font-weight: 600;">AI & Machine Learning</span>
+        <h3 style="font-size: 18px; font-weight: 700; margin: 10px 0;">Introduction to Machine Learning</h3>
+        <p style="color: #64748b; font-size: 14px;">Understand the fundamentals of ML, algorithms, and how to build predictive models.</p>
+
+        <div style="margin-top: 15px;">
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Skills you'll gain:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <span style="background: #f0f9ff; color: #0284c7; padding: 3px 8px; border-radius: 50px; font-size: 11px;">Python</span>
+            <span style="background: #f0f9ff; color: #0284c7; padding: 3px 8px; border-radius: 50px; font-size: 11px;">Scikit-learn</span>
+            <span style="background: #f0f9ff; color: #0284c7; padding: 3px 8px; border-radius: 50px; font-size: 11px;">ML Algorithms</span>
+            <span style="background: #f0f9ff; color: #0284c7; padding: 3px 8px; border-radius: 50px; font-size: 11px;">Model Evaluation</span>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+          <div style="display: flex; align-items: center; gap: 5px;">
+            <div style="color: #f59e0b;">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+            <span style="font-weight: 600; font-size: 13px;">4.6</span>
+            <span style="color: #64748b; font-size: 13px;">(1,502)</span>
+          </div>
+          <div style="color: #64748b; font-size: 13px;">
+            <i class="far fa-clock"></i> 10-12 weeks
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- View All -->
+<div class="container text-center">
+  <a href="#" style="display: inline-block; background: #3a86ff; color: white; padding: 12px 30px; margin-top: 20px; margin-bottom: 50px; border-radius: 8px; text-decoration: none; font-weight: 600;">View All Courses</a>
+</div>
+
+    <!-- Courses End -->
+
+    <!-- FAQ Start  -->
+    <div class="container-xxl py-5 category">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h1 class="mb-5">Frequently Asked Questions</h1>
+            </div>
+            <div class="row g-2">
+                <div class="col-12">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                What is BrillX?
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                BrillX is an AI-powered learning platform that revolutionizes education through personalized learning experiences. Our platform uses advanced algorithms to adapt learning materials to each user's preferences, skills, and pace, while also featuring intelligent knowledge extraction from PDFs to transform static documents into interactive learning content.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How does BrillX personalize learning?
+                            </button>
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                BrillX uses sophisticated AI algorithms to analyze your learning patterns, preferences, and performance. The system adapts content difficulty, learning pace, and material presentation based on your individual needs, ensuring optimal knowledge retention and engagement throughout your learning journey.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What is intelligent knowledge extraction from PDFs?
+                            </button>
+                          </h2>
+                          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                Our intelligent knowledge extraction technology transforms standard PDF documents into interactive learning materials. The system identifies key concepts, creates structured learning paths, generates quizzes, and extracts relevant examples from your PDFs, making static content dynamic and engaging for effective learning.
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                What subjects does BrillX cover?
+                              </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                BrillX covers a wide range of subjects with a focus on technology and professional skills. Our current categories include Web Development, App Development, Data Analysis, and Machine Learning, with more subjects being added regularly through our AI-powered content generation and extraction capabilities.       
+                                </div>
+                            </div>
+                          </div>
+                          <div class="accordion-item">
+                            <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                How do I get started with BrillX?
+                              </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                Getting started with BrillX is simple! Just click the Sign Up button to create your account. Our AI will guide you through an initial assessment to understand your learning preferences and goals, then create a personalized learning path tailored specifically to your needs. You can also upload your own PDFs to transform them into interactive learning materials.
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FAQ End  -->
+
+ <!-- Footer Start -->
+<div class="container-fluid bg-dark text-light footer wow fadeIn" data-wow-delay="0.1s" style="width: 100vw; margin: 0; padding: 0; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-bottom: 0 !important;">
+    <div class="container py-5" style="max-width: 100%; padding: 50px 5% 0 5%; margin-bottom: 0;">
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-white mb-3">Quick Link</h4>
+                <p><a class="text-light" href="#">About Us</a></p>
+                <p><a class="text-light" href="features.html">Features</a></p>
+                <p><a class="text-light" href="">Privacy Policy</a></p>
+                <p><a class="text-light" href="">Terms & Condition</a></p>
+                <p><a class="text-light" href="">FAQs & Help</a></p>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-white mb-3">Contact</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, Bangalore, Karnataka</p>
+                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 8683045908</p>
+                <p class="mb-2"><i class="fa fa-envelope me-3"></i>brillx@gmail.com</p>
+                <div class="d-flex pt-2">
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                    <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-white mb-3">Subscribe to our Newsletter</h4>
+                <p>Subscribe now and join our growing community of learners committed to lifelong education! </p>
+                <div class="position-relative mx-auto" style="max-width: 400px;">
+                    <form action="#">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email"
+                            placeholder="Your email" required>
+                        <button type="submit"
+                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="max-width: 100%; padding: 20px 5% 0 5%; margin-bottom: 0;">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-0">
+                    &copy; <a class="border-bottom" href="index.html">BrillX</a>, All Right Reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Auth Modal -->
+<div id="auth-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0, 0, 0, 0.5);">
+    <div id="auth-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: transparent; width: 400px; height: 500px;"></div>
+</div>
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script type="module" src="src/main.js"></script>
+</body>
+
+</html>

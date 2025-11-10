@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduAdmin - Dashboard</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="styles/dashboard_styles.css" id="mainStylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <!-- Menu Button with Image -->
+      <button class="menu-btn" id="menuBtn">
+        <div class="menu-image">
+          <img src="images/menus.png" alt="Menu Icon" />
+        </div>
+      </button>
+
+      <!-- Logo -->
+      <div class="logo">
+        <img src="images/brillx-logo.png" alt="BrillX Logo" class="logo-img" />
+      </div>
+    </div>
+
+    <div class="navbar-right">
+      <!-- Search Box -->
+      <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+
+      <label>
+        <input class="toggle-checkbox" type="checkbox" id="themeToggle">
+        <div class="toggle-slot">
+          <div class="sun-icon-wrapper">
+            <div class="iconify sun-icon" data-icon="feather-sun" data-inline="false"></div>
+          </div>
+          <div class="toggle-button"></div>
+          <div class="moon-icon-wrapper">
+            <div class="iconify moon-icon" data-icon="feather-moon" data-inline="false"></div>
+          </div>
+        </div>
+      </label>
+
+      <!-- Icons Container -->
+      <div class="icon-container">
+        <!-- Notification Image -->
+        <div class="notification-icon">
+          <img src="images/bell.png" alt="Notification Icon" class="icon-img" />
+          <div class="notification-badge"></div>
+        </div>
+
+        <!-- Profile Image with Clerk Integration -->
+        <div class="user-menu">
+          <button class="user-button" id="user-button">
+            <img src="images/user.png" alt="User Profile" class="profile-img user-avatar" id="user-avatar" onerror="this.style.display='none'" />
+          </button>
+          
+          <div class="dropdown-menu" id="dropdown-menu">
+            <button class="dropdown-item" id="profile-btn">
+              <i>👤</i>
+              <span>Profile</span>
+            </button>
+            <button class="dropdown-item" id="settings-btn">
+              <i>⚙️</i>
+              <span>Settings</span>
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item signout" id="signout-btn">
+              <i>🚪</i>
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-items">
+            <!-- Home Section -->
+            <div class="menu-section">Home</div>
+            
+            <div class="menu-item">
+                <i class="fas fa-tachometer-alt menu-icon"></i>
+                <span class="menu-text">Dashboard</span>
+            </div>
+            
+            <div class="menu-item" data-redirect="student_report.html">
+                <i class="fas fa-chart-bar menu-icon"></i>
+                <span class="menu-text">Student Report</span>
+            </div>
+
+        <!-- Learning Section -->
+<div class="menu-section">Learning</div>
+
+<div class="menu-item" data-redirect="courses.html">
+    <i class="fas fa-book menu-icon"></i>
+    <span class="menu-text">Courses</span>
+</div>
+
+<div class="menu-item" data-redirect="batches.html">
+    <i class="fas fa-users menu-icon"></i>
+    <span class="menu-text">Batches</span>
+</div>
+
+<div class="menu-item" data-redirect="assignments.html">
+    <i class="fas fa-tasks menu-icon"></i>
+    <span class="menu-text">Assignments</span>
+</div>
+
+<div class="menu-item" data-redirect="quizzes.html">
+    <i class="fas fa-question-circle menu-icon"></i>
+    <span class="menu-text">Quizzes</span>
+</div>
+
+<div class="menu-item" data-redirect="test.html">
+    <i class="fas fa-file-alt menu-icon"></i>
+    <span class="menu-text">Test</span>
+</div>
+
+            <!-- Mentor Section -->
+            <div class="menu-section">Mentor</div>
+            
+            <div class="menu-item" data-redirect="ai-mentor.html">
+                <i class="fas fa-robot menu-icon"></i>
+                <span class="menu-text">AI Mentor</span>
+            </div>
+            
+            <div class="menu-item" data-redirect="pdf-chatbot.html">
+                <i class="fas fa-file-pdf menu-icon"></i>
+                <span class="menu-text">PDF Chatbot</span>
+            </div>
+
+            <!-- Social Section -->
+            <div class="menu-section">Social</div>
+            
+            <div class="menu-item" data-redirect="community.html">
+                <i class="fas fa-users menu-icon"></i>
+                <span class="menu-text">Community</span>
+            </div>
+            
+            <div class="menu-item" data-redirect="help-support.html">
+                <i class="fas fa-life-ring menu-icon" ></i>
+                <span class="menu-text">Help & Support</span>
+            </div>
+        </div>
+    </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <!-- Banner Section -->
+    <div class="dashboard-banner">
+        <div class="banner-content">
+            <h1>Welcome to Your Learning Dashboard</h1>
+            <p>Track your progress, access courses, and manage your learning journey</p>
+            <button class="banner-btn">Explore Features</button>
+        </div>
+    </div>
+
+    <div class="content-header">
+        <h1>Dashboard</h1>
+        <p>Welcome back! Here's what's happening with your learning today.</p>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-title">Enrolled Courses</div>
+                <div class="stat-icon" style="background-color: #3a86ff">
+                    <i class="fas fa-book-open"></i>
+                </div>
+            </div>
+            <div class="stat-value">8</div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i>
+                <span>2 new this month</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-title">Assignments Due</div>
+                <div class="stat-icon" style="background-color: #8338ec">
+                    <i class="fas fa-tasks"></i>
+                </div>
+            </div>
+            <div class="stat-value">3</div>
+            <div class="stat-change negative">
+                <i class="fas fa-clock"></i>
+                <span>Next: 2 days</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-title">Overall Progress</div>
+                <div class="stat-icon" style="background-color: #ff006e">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+            </div>
+            <div class="stat-value">78%</div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i>
+                <span>5% from last week</span>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-header">
+                <div class="stat-title">Hours Studied</div>
+                <div class="stat-icon" style="background-color: #fb5607">
+                    <i class="fas fa-clock"></i>
+                </div>
+            </div>
+            <div class="stat-value">24.5</div>
+            <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i>
+                <span>This week</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Courses Section -->
+    <div class="section-header">
+        <h2>Featured Courses</h2>
+        <div class="view-all-dropdown">
+            <select class="view-all-select">
+                <option>View All</option>
+                <option>My Courses</option>
+                <option>Recommended</option>
+                <option>Popular</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="courses-grid">
+        <div class="course-card">
+            <div class="course-logo">
+                <i class="fas fa-code"></i>
+            </div>
+            <div class="course-info">
+                <h3>Web Development</h3>
+                <p>HTML, CSS, JavaScript</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 65%"></div>
+                </div>
+                <span class="progress-text">65% Complete</span>
+            </div>
+        </div>
+
+        <div class="course-card">
+            <div class="course-logo">
+                <i class="fas fa-database"></i>
+            </div>
+            <div class="course-info">
+                <h3>Data Science</h3>
+                <p>Python, ML, Analytics</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%"></div>
+                </div>
+                <span class="progress-text">40% Complete</span>
+            </div>
+        </div>
+
+        <div class="course-card">
+            <div class="course-logo">
+                <i class="fas fa-paint-brush"></i>
+            </div>
+            <div class="course-info">
+                <h3>UI/UX Design</h3>
+                <p>Figma, Prototyping</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 80%"></div>
+                </div>
+                <span class="progress-text">80% Complete</span>
+            </div>
+        </div>
+
+        <div class="course-card">
+            <div class="course-logo">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="course-info">
+                <h3>Mobile Development</h3>
+                <p>React Native, Flutter</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
+                <span class="progress-text">25% Complete</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Batches & Courses Section -->
+    <div class="section-header">
+        <h2>My Learning Schedule</h2>
+        <div class="view-all-dropdown">
+            <select class="view-all-select">
+                <option>This Week</option>
+                <option>Next Week</option>
+                <option>This Month</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="learning-schedule">
+        <!-- Left: Batches Assigned to Me -->
+        <div class="batches-section">
+            <h3>Batches Assigned to Me</h3>
+            <div class="batches-container">
+                <div class="batch-card">
+                    <div class="batch-header">
+                        <div class="batch-logo">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="batch-info">
+                            <h4>Web Dev - Batch A</h4>
+                            <p>Mon, Wed, Fri • 10:00 AM</p>
+                        </div>
+                    </div>
+                    <div class="batch-progress">
+                        <span>Next: Tomorrow</span>
+                        <button class="join-btn">Join Class</button>
+                    </div>
+                </div>
+
+                <div class="batch-card">
+                    <div class="batch-header">
+                        <div class="batch-logo">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="batch-info">
+                            <h4>Data Science - Batch B</h4>
+                            <p>Tue, Thu • 2:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="batch-progress">
+                        <span>Live Now</span>
+                        <button class="join-btn live">Join Now</button>
+                    </div>
+                </div>
+
+                <div class="batch-card">
+                    <div class="batch-header">
+                        <div class="batch-logo">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="batch-info">
+                            <h4>UI/UX - Batch C</h4>
+                            <p>Mon, Thu • 4:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="batch-progress">
+                        <span>Starts in 2 days</span>
+                        <button class="join-btn">View Materials</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Courses I'm Assigned -->
+        <div class="assigned-courses">
+            <h3>My Assigned Courses</h3>
+            <div class="courses-list">
+                <div class="assigned-course">
+                    <div class="course-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="course-details">
+                        <h4>Advanced JavaScript</h4>
+                        <p>Dr. Sarah Johnson</p>
+                        <div class="course-meta">
+                            <span class="lessons">12 Lessons</span>
+                            <span class="duration">8 Weeks</span>
+                        </div>
+                    </div>
+                    <div class="course-status">
+                        <span class="status in-progress">In Progress</span>
+                    </div>
+                </div>
+
+                <div class="assigned-course">
+                    <div class="course-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="course-details">
+                        <h4>Machine Learning Basics</h4>
+                        <p>Prof. Mike Chen</p>
+                        <div class="course-meta">
+                            <span class="lessons">8 Lessons</span>
+                            <span class="duration">6 Weeks</span>
+                        </div>
+                    </div>
+                    <div class="course-status">
+                        <span class="status completed">Completed</span>
+                    </div>
+                </div>
+
+                <div class="assigned-course">
+                    <div class="course-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="course-details">
+                        <h4>React Native Development</h4>
+                        <p>Alex Rodriguez</p>
+                        <div class="course-meta">
+                            <span class="lessons">15 Lessons</span>
+                            <span class="duration">10 Weeks</span>
+                        </div>
+                    </div>
+                    <div class="course-status">
+                        <span class="status not-started">Not Started</span>
+                    </div>
+                </div>
+
+                <div class="assigned-course">
+                    <div class="course-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="course-details">
+                        <h4>Cloud Computing</h4>
+                        <p>Dr. Emily Watson</p>
+                        <div class="course-meta">
+                            <span class="lessons">10 Lessons</span>
+                            <span class="duration">7 Weeks</span>
+                        </div>
+                    </div>
+                    <div class="course-status">
+                        <span class="status in-progress">In Progress</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <script type="module">
+    import { Clerk } from '@clerk/clerk-js';
+
+    const clerk = new Clerk(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
+
+    // Elements for user menu
+    const userButton = document.getElementById('user-button');
+    const userAvatar = document.getElementById('user-avatar');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const profileBtn = document.getElementById('profile-btn');
+    const settingsBtn = document.getElementById('settings-btn');
+    const signoutBtn = document.getElementById('signout-btn');
+
+    // Toggle dropdown menu
+    userButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        userButton.classList.toggle('active');
+        dropdownMenu.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+        userButton.classList.remove('active');
+        dropdownMenu.classList.remove('active');
+    });
+
+    // Profile button click
+    profileBtn.addEventListener('click', () => {
+        clerk.openUserProfile();
+        dropdownMenu.classList.remove('active');
+        userButton.classList.remove('active');
+    });
+
+    // Settings button click
+    settingsBtn.addEventListener('click', () => {
+        console.log('Settings clicked');
+        dropdownMenu.classList.remove('active');
+        userButton.classList.remove('active');
+    });
+
+    // Signout button click
+    signoutBtn.addEventListener('click', async () => {
+        try {
+            await clerk.signOut();
+            console.log('User signed out successfully');
+            window.location.href = '/';
+        } catch (error) {
+            console.error('Sign out failed:', error);
+        }
+    });
+
+    async function initializeClerk() {
+        try {
+            await clerk.load();
+            console.log('Clerk loaded successfully');
+            
+            // Update UI with user info
+            if (clerk.user) {
+                updateUserInfo(clerk.user);
+            }
+            
+            // Listen for user changes
+            clerk.addListener(({ user }) => {
+                if (user) {
+                    updateUserInfo(user);
+                }
+            });
+            
+        } catch (error) {
+            console.error('Failed to initialize Clerk:', error);
+        }
+    }
+
+    function updateUserInfo(user) {
+        // Update avatar with Google profile picture
+        if (user.imageUrl) {
+            userAvatar.src = user.imageUrl;
+            userAvatar.style.display = 'block';
+        } else {
+            // Keep the default user.png if no profile picture
+            userAvatar.src = 'user.png';
+            userAvatar.style.display = 'block';
+        }
+    }
+
+    // Update active menu item and handle redirects
+    const menuItems = document.querySelectorAll('.menu-item');
+menuItems.forEach(item => {
+  item.addEventListener('click', () => {
+    menuItems.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    
+    // Handle redirects using data attribute
+    const redirectUrl = item.getAttribute('data-redirect');
+    if (redirectUrl) {
+      window.location.href = redirectUrl;
+    }
+  });
+});
+
+
+
+
+    initializeClerk();
+  </script>
+
+  <script>
+    // Toggle side menu
+    const menuBtn = document.getElementById('menuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const mainContent = document.getElementById('mainContent');
+
+    menuBtn.addEventListener('click', () => {
+      sideMenu.classList.toggle('active');
+      menuBtn.classList.toggle('active');
+    });
+
+// Set Dashboard as active on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const menuItems = document.querySelectorAll('.menu-item');
+    
+    // Set Dashboard as active initially
+    const dashboardItem = document.querySelector('.menu-item:has(.fa-tachometer-alt)');
+    if (dashboardItem) {
+        dashboardItem.classList.add('active');
+    }
+    
+    // Update active menu item on click
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            menuItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+        });
+    });
+});
+
+    // Dark Mode Toggle with CSS File Switching
+    const themeToggle = document.getElementById('themeToggle');
+    const mainStylesheet = document.getElementById('mainStylesheet');
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    
+    // Set initial theme based on saved preference
+    if (savedTheme === 'dark') {
+      switchToDarkMode();
+      themeToggle.checked = true;
+    }
+
+    // Toggle theme on checkbox change
+    themeToggle.addEventListener('change', function() {
+      if (this.checked) {
+        switchToDarkMode();
+        localStorage.setItem('theme', 'dark');
+      } else {
+        switchToLightMode();
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    function switchToDarkMode() {
+      mainStylesheet.href = 'styles/dashboard_styles-dark.css';
+    }
+
+    function switchToLightMode() {
+      mainStylesheet.href = 'styles/dashboard_styles.css';
+    }
+  </script>
+
+  <style>
+    /* User Menu Styles */
+    .user-menu {
+        position: relative;
+        display: inline-block;
+    }
+
+    .user-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+    }
+
+    .user-button:hover {
+        transform: scale(1.05);
+    }
+
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #e0e0e0;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 8px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        min-width: 200px;
+        padding: 8px 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        border: 1px solid #e0e0e0;
+    }
+
+    .dropdown-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        color: #2c3e50;
+        text-decoration: none;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        font-size: 14px;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .dropdown-item i {
+        width: 16px;
+        text-align: center;
+        color: #7f8c8d;
+    }
+
+    .dropdown-divider {
+        height: 1px;
+        background-color: #e0e0e0;
+        margin: 4px 0;
+    }
+
+    .dropdown-item.signout {
+        color: #e74c3c;
+    }
+
+    .dropdown-item.signout i {
+        color: #e74c3c;
+    }
+
+    .dropdown-item.signout:hover {
+        background-color: #fee;
+    }
+  </style>
+</body>
+</html>

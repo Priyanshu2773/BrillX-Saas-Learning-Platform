@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BrillX - AI Chatbot</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+    <script src="src/chatbot.js" type="module"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #3f61fb;
+            text-decoration: none;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3f61fb;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 70px;
+            bottom: 0;
+            width: 260px;
+            background: white;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+            padding: 30px 0;
+            overflow-y: auto;
+            z-index: 999;
+        }
+
+        .sidebar-item {
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .sidebar-item:hover {
+            background: #f0f4ff;
+            color: #3f61fb;
+        }
+
+        .sidebar-item.active {
+            background: #e8efff;
+            color: #3f61fb;
+            border-right: 3px solid #3f61fb;
+        }
+
+        .sidebar-item i {
+            font-size: 20px;
+            width: 25px;
+        }
+
+        /* Main Content */
+        .main-content {
+            /* margin-left: 260px; */
+            margin-top: 50px;
+            min-height: calc(100vh - 70px);
+            position: relative;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+            background: #f8f9fa;
+        }
+
+        /* Initial State - Centered Input */
+        .initial-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .initial-view.hidden {
+            display: none;
+        }
+
+        .welcome-section {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .welcome-section h1 {
+            font-size: 48px;
+            color: #3f61fb;
+            font-weight: 700;
+        }
+
+        .welcome-section p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .suggestion-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            margin-bottom: 40px;
+        }
+
+        .suggestion-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .suggestion-card:hover {
+            border-color: #3f61fb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(63,97,251,0.15);
+        }
+
+        .suggestion-card h4 {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .suggestion-card p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e0e0e0;
+        }
+
+        /* Chat View */
+        .chat-view {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-view.active {
+            display: flex;
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .message {
+            display: flex;
+            gap: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .user-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .ai-avatar {
+            background: linear-gradient(135deg, #3f61fb 0%, #fb873f 100%);
+            color: white;
+        }
+
+        .message-content {
+            flex: 1;
+            padding: 16px 20px;
+            border-radius: 12px;
+            line-height: 1.6;
+        }
+
+        .user-message .message-content {
+            background: #e8efff;
+            color: #333;
+        }
+
+        .ai-message .message-content {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            color: #333;
+        }
+
+        /* Input Container */
+        .input-container {
+            padding: 20px;
+        }
+
+        .input-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 16px 60px 16px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 24px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            resize: none;
+            font-family: 'Heebo', sans-serif;
+            min-height: 56px;
+            max-height: 200px;
+            overflow: hidden;
+        }
+
+        .chat-input:focus {
+            border-color: #3f61fb;
+            box-shadow: 0 0 0 3px rgba(63,97,251,0.1);
+        }
+
+        .send-button {
+            position: absolute;
+            right: 8px;
+            bottom: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3f61fb;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .send-button:hover {
+            background: #2d4dd4;
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 6px;
+            padding: 20px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #3f61fb;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .welcome-section h1 {
+                font-size: 32px;
+            }
+
+            .suggestion-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .new-chat-btn {
+            margin: 0 20px 20px;
+            padding: 12px 20px;
+            background: #3f61fb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .new-chat-btn:hover {
+            background: #2d4dd4;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <span>BrillX</span>
+        </a>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="#"> <img src="images/user.png" alt="User Profile" class="profile-img user-avatar" id="user-avatar" onerror="this.style.display='none'" /></a>
+        </div>
+    </nav>
+
+
+  <div class="sidebar">
+        <button class="new-chat-btn" onclick="startNewChat()">
+            <i class="fas fa-plus"></i> New Chat
+        </button>
+        <a href="#" class="sidebar-item active">
+            <i class="fas fa-comments"></i>
+            <span>AI Chatbot</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="fas fa-book"></i>
+            <span>My Courses</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="fas fa-file-pdf"></i>
+            <span>PDF Library</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Progress</span>
+        </a>
+        <a href="#" class="sidebar-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+    </div> 
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="chat-container">
+            <!-- Initial View -->
+            <div class="initial-view" id="initialView">
+                <div class="welcome-section">
+                    <h1>Hello! How can I help you today?</h1>
+                    <p>Ask me anything about your courses, upload PDFs for analysis, or get personalized learning recommendations</p>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            class="chat-input" 
+                            id="initialInput" 
+                            placeholder="Message BrillX AI..."
+                            rows="1"
+                        ></textarea>
+                        <button class="send-button" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="suggestion-cards">
+                    <div class="suggestion-card" onclick="useSuggestion('Explain machine learning basics')">
+                        <h4>🤖 Machine Learning</h4>
+                        <p>Explain the basics of machine learning</p>
+                    </div>
+                    <div class="suggestion-card" onclick="useSuggestion('Create a web development roadmap')">
+                        <h4>🌐 Web Development</h4>
+                        <p>Create a learning roadmap for web development</p>
+                    </div>
+                    <div class="suggestion-card" onclick="useSuggestion('How to analyze data with Python?')">
+                        <h4>📊 Data Analysis</h4>
+                        <p>How to analyze data with Python?</p>
+                    </div>
+                    <div class="suggestion-card" onclick="useSuggestion('Best practices for React')">
+                        <h4>⚛️ React Tips</h4>
+                        <p>What are the best practices for React?</p>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <!-- Chat View -->
+            <div class="chat-view" id="chatView">
+                <div class="messages-container" id="messagesContainer">
+                    <!-- Messages will be added here -->
+                </div>
+
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea 
+                            class="chat-input" 
+                            id="chatInput" 
+                            placeholder="Type your message..."
+                            rows="1"
+                        ></textarea>
+                        <button class="send-button" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        
+
+    </script>
+</body>
+</html>

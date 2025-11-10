@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrillX - Assessment Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/test.css">
+    
+</head>
+<body>
+
+     <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <!-- Menu Button with Image -->
+      <button class="menu-btn" id="menuBtn">
+        <div class="menu-image">
+          <img src="images/menus.png" alt="Menu Icon" />
+        </div>
+      </button>
+
+      <!-- Logo -->
+      <div class="logo">
+        <img src="images/brillx-logo.png" alt="BrillX Logo" class="logo-img" />
+      </div>
+    </div>
+
+    <div class="navbar-right">
+      <!-- Search Box -->
+      <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+
+      <label>
+        <input class="toggle-checkbox" type="checkbox" id="themeToggle">
+        <div class="toggle-slot">
+          <div class="sun-icon-wrapper">
+            <div class="iconify sun-icon" data-icon="feather-sun" data-inline="false"></div>
+          </div>
+          <div class="toggle-button"></div>
+          <div class="moon-icon-wrapper">
+            <div class="iconify moon-icon" data-icon="feather-moon" data-inline="false"></div>
+          </div>
+        </div>
+      </label>
+
+      <!-- Icons Container -->
+      <div class="icon-container">
+        <!-- Notification Image -->
+        <div class="notification-icon">
+          <img src="images/bell.png" alt="Notification Icon" class="icon-img" />
+          <div class="notification-badge"></div>
+        </div>
+
+        <!-- Profile Image with Clerk Integration -->
+        <div class="user-menu">
+          <button class="user-button" id="user-button">
+            <img src="images/user.png" alt="User Profile" class="profile-img user-avatar" id="user-avatar" onerror="this.style.display='none'" />
+          </button>
+          
+          <div class="dropdown-menu" id="dropdown-menu">
+            <button class="dropdown-item" id="profile-btn">
+              <i>👤</i>
+              <span>Profile</span>
+            </button>
+            <button class="dropdown-item" id="settings-btn">
+              <i>⚙️</i>
+              <span>Settings</span>
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item signout" id="signout-btn">
+              <i>🚪</i>
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-items">
+            <!-- Home Section -->
+            <div class="menu-section">Home</div>
+            
+            <div class="menu-item" data-redirect="dashboard.html">
+                <i class="fas fa-tachometer-alt menu-icon"></i>
+                <span class="menu-text">Dashboard</span>
+            </div>
+            
+            <div class="menu-item" data-redirect="student_report.html">
+                <i class="fas fa-chart-bar menu-icon"></i>
+                <span class="menu-text">Student Report</span>
+            </div>
+
+            <!-- Learning Section -->
+            <div class="menu-section">Learning</div>
+
+            <div class="menu-item" data-redirect="courses.html">
+                <i class="fas fa-book menu-icon"></i>
+                <span class="menu-text">Courses</span>
+            </div>
+
+            <div class="menu-item" data-redirect="batches.html">
+                <i class="fas fa-users menu-icon"></i>
+                <span class="menu-text">Batches</span>
+            </div>
+
+            <div class="menu-item" data-redirect="assignments.html">
+                <i class="fas fa-tasks menu-icon"></i>
+                <span class="menu-text">Assignments</span>
+            </div>
+
+            <div class="menu-item" data-redirect="quizzes.html">
+                <i class="fas fa-question-circle menu-icon"></i>
+                <span class="menu-text">Quizzes</span>
+            </div>
+
+            <div class="menu-item active" data-redirect="test.html">
+                <i class="fas fa-file-alt menu-icon"></i>
+                <span class="menu-text">Test</span>
+            </div>
+
+            <!-- Mentor Section -->
+            <div class="menu-section">Mentor</div>
+            
+            <div class="menu-item" data-redirect="ai-mentor.html">
+                <i class="fas fa-robot menu-icon"></i>
+                <span class="menu-text">AI Mentor</span>
+            </div>
+            
+            <div class="menu-item ">
+                <i class="fas fa-file-pdf menu-icon"></i>
+                <span class="menu-text">PDF Chatbot</span>
+            </div>
+
+            <!-- Social Section -->
+            <div class="menu-section">Social</div>
+            
+            <div class="menu-item" data-redirect="community.html">
+                <i class="fas fa-users menu-icon"></i>
+                <span class="menu-text">Community</span>
+            </div>
+            
+            <div class="menu-item" data-redirect="help-support.html">
+                <i class="fas fa-life-ring menu-icon"></i>
+                <span class="menu-text">Help & Support</span>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Tests Dashboard Page -->
+        <div class="page active" id="tests-dashboard">
+            <div class="page-header">
+                <h2>Assessment Center</h2>
+                <p>Test your knowledge with professional assessments</p>
+            </div>
+            
+            <div class="tests-grid" id="tests-grid">
+                <!-- HTML Assessment -->
+                <div class="test-card available" data-test-id="html-professional-test">
+                    <div class="test-header">
+                        <div>
+                            <h3 class="test-title">HTML5 Professional Certification</h3>
+                            <p class="test-course">Web Development Mastery</p>
+                        </div>
+                        <span class="test-status status-available">Available</span>
+                    </div>
+                    <p class="test-description">
+                        Comprehensive assessment covering HTML5 semantics, forms, multimedia, accessibility, and modern web standards. 30 questions, 45 minutes.
+                    </p>
+                    <div class="test-meta">
+                        <div class="test-duration">
+                            <i class="far fa-clock"></i>
+                            <span>45 minutes</span>
+                        </div>
+                        <div class="test-questions">30 Questions</div>
+                        <div class="test-marks">30 Marks</div>
+                    </div>
+                    <div class="test-actions">
+                        <button class="btn" onclick="startTest('html-professional-test')">
+                            <i class="fas fa-play"></i>
+                            Start Assessment
+                        </button>
+                        <button class="btn btn-outline" onclick="viewTestInstructions('html-professional-test')">
+                            <i class="fas fa-info-circle"></i>
+                            Instructions
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Completed Test -->
+                <div class="test-card completed" data-test-id="html-professional-test" style="display: none;" id="completed-test">
+                    <div class="test-header">
+                        <div>
+                            <h3 class="test-title">HTML5 Professional Certification</h3>
+                            <p class="test-course">Web Development Mastery</p>
+                        </div>
+                        <span class="test-status status-completed">Completed</span>
+                    </div>
+                    <p class="test-description">
+                        Comprehensive assessment covering HTML5 semantics, forms, multimedia, accessibility, and modern web standards.
+                    </p>
+                    <div class="test-meta">
+                        <div class="test-duration">
+                            <i class="far fa-check-circle"></i>
+                            <span id="completion-date">Completed: </span>
+                        </div>
+                        <div class="test-score" id="test-score">Score: -/30</div>
+                    </div>
+                    <div class="test-actions">
+                        <button class="btn btn-success" onclick="viewTestResults('html-professional-test')">
+                            <i class="fas fa-chart-bar"></i>
+                            View Results
+                        </button>
+                        <button class="btn btn-outline" onclick="reviewTestAnswers('html-professional-test')">
+                            <i class="fas fa-redo"></i>
+                            Review Answers
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Upcoming Tests -->
+                <div class="test-card disabled">
+                    <div class="test-header">
+                        <div>
+                            <h3 class="test-title">CSS3 Advanced Certification</h3>
+                            <p class="test-course">Styling & Layout Mastery</p>
+                        </div>
+                        <span class="test-status status-disabled">Coming Soon</span>
+                    </div>
+                    <p class="test-description">
+                        Advanced CSS assessment covering Flexbox, Grid, animations, responsive design, and modern layout techniques.
+                    </p>
+                    <div class="test-meta">
+                        <div class="test-duration">
+                            <i class="far fa-clock"></i>
+                            <span>60 minutes</span>
+                        </div>
+                        <div class="test-questions">35 Questions</div>
+                        <div class="test-marks">35 Marks</div>
+                    </div>
+                    <div class="test-actions">
+                        <button class="btn btn-secondary" disabled>
+                            <i class="fas fa-lock"></i>
+                            Available Soon
+                        </button>
+                    </div>
+                </div>
+
+                <div class="test-card disabled">
+                    <div class="test-header">
+                        <div>
+                            <h3 class="test-title">JavaScript Fundamentals</h3>
+                            <p class="test-course">Programming Essentials</p>
+                        </div>
+                        <span class="test-status status-disabled">Coming Soon</span>
+                    </div>
+                    <p class="test-description">
+                        JavaScript programming assessment covering variables, functions, DOM manipulation, and basic algorithms.
+                    </p>
+                    <div class="test-meta">
+                        <div class="test-duration">
+                            <i class="far fa-clock"></i>
+                            <span>50 minutes</span>
+                        </div>
+                        <div class="test-questions">25 Questions</div>
+                        <div class="test-marks">25 Marks</div>
+                    </div>
+                    <div class="test-actions">
+                        <button class="btn btn-secondary" disabled>
+                            <i class="fas fa-lock"></i>
+                            Available Soon
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions Page -->
+        <div class="page" id="instructions-page">
+            <div class="instructions-container">
+                <div class="page-header">
+                    <h2 id="instructions-title">Assessment Instructions</h2>
+                    <p>Please read the instructions carefully before starting</p>
+                </div>
+                
+                <div class="instructions-content">
+                    <div class="instruction-card">
+                        <h3><i class="fas fa-info-circle"></i> General Instructions</h3>
+                        <ul>
+                            <li>This assessment contains <strong>30 questions</strong></li>
+                            <li>Total duration: <strong>45 minutes</strong></li>
+                            <li>Total marks: <strong>30</strong> (1 mark per question)</li>
+                            <li>All questions are <strong>multiple choice</strong></li>
+                            <li>Select only <strong>one answer</strong> per question</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-card">
+                        <h3><i class="fas fa-clipboard-check"></i> Navigation & Submission</h3>
+                        <ul>
+                            <li>Use <strong>Next</strong> and <strong>Previous</strong> buttons to navigate</li>
+                            <li>You can review and change answers before submission</li>
+                            <li>Click <strong>Submit Assessment</strong> when finished</li>
+                            <li>Results will be shown immediately after submission</li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-card warning">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Important Notes</h3>
+                        <ul>
+                            <li><strong>Single attempt only</strong> - You cannot retake this assessment</li>
+                            <li>Do not refresh the page during the assessment</li>
+                            <li>Ensure stable internet connection</li>
+                            <li>Timer will continue if you leave the page</li>
+                        </ul>
+                    </div>
+
+                    <div class="read-confirm">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="instructions-confirm">
+                            <span class="checkmark"></span>
+                            I have read and understood all the instructions
+                        </label>
+                    </div>
+
+                    <div class="instructions-actions">
+                        <button class="btn btn-outline" onclick="showPage('tests-dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back to Assessments
+                        </button>
+                        <button class="btn" id="start-assessment-btn" onclick="startFromInstructions()" disabled>
+                            <i class="fas fa-play"></i> Start Assessment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Test Interface Page -->
+        <div class="page" id="test-interface">
+            <div class="test-interface">
+                <div class="test-header-bar">
+                    <div class="test-progress">
+                        <div class="progress-info">
+                            <span class="progress-text">Question <span id="current-question">1</span> of 30</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="test-timer">
+                        <i class="far fa-clock"></i>
+                        <span id="timer-display">45:00</span>
+                    </div>
+                </div>
+                
+                <div class="question-container">
+                    <div class="question-header">
+                        <div class="question-number">Question <span id="question-number">1</span></div>
+                        <div class="question-marks">1 Mark</div>
+                    </div>
+                    <div class="question-text" id="question-text">
+                        <!-- Question will be loaded here -->
+                    </div>
+                    <div class="options-list" id="options-container">
+                        <!-- Options will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="test-navigation">
+                    <button class="nav-btn" id="prev-btn" onclick="navigateQuestion(-1)">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    
+                    <div class="question-jump">
+                        <span>Jump to:</span>
+                        <select id="question-selector" onchange="jumpToQuestion(this.value)">
+                            <!-- Options will be populated dynamically -->
+                        </select>
+                    </div>
+                    
+                    <button class="nav-btn" id="next-btn" onclick="navigateQuestion(1)">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                    
+                    <button class="nav-btn btn-success" id="submit-btn" onclick="showSubmitConfirmation()">
+                        <i class="fas fa-paper-plane"></i> Submit Assessment
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Page -->
+        <div class="page" id="results-page">
+            <div class="results-container">
+                <div class="page-header">
+                    <h2>Assessment Results</h2>
+                    <p id="results-subtitle">Your performance summary</p>
+                </div>
+                
+                <div class="score-display">
+                    <div class="score-circle">
+                        <div class="score-value" id="final-score">0%</div>
+                    </div>
+                    <div class="score-text" id="score-text">Excellent!</div>
+                    <p id="score-description">You have completed the assessment successfully</p>
+                </div>
+                
+                <div class="results-details">
+                    <div class="result-item">
+                        <span class="result-label">Assessment Name:</span>
+                        <span class="result-value" id="result-test-name">HTML5 Professional Certification</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Correct Answers:</span>
+                        <span class="result-value" id="correct-answers">0/30</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Percentage Score:</span>
+                        <span class="result-value" id="percentage-score">0%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Time Taken:</span>
+                        <span class="result-value" id="time-taken">0 minutes</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Submitted:</span>
+                        <span class="result-value" id="submission-time">Just now</span>
+                    </div>
+                </div>
+                
+                <div class="performance-feedback">
+                    <h3 class="feedback-title" id="feedback-title">Performance Analysis</h3>
+                    <p class="feedback-text" id="feedback-text">
+                        Based on your score, here are some recommendations for improvement...
+                    </p>
+                </div>
+                
+                <div class="results-actions">
+                    <button class="btn" onclick="showPage('tests-dashboard')">
+                        <i class="fas fa-home"></i> Back to Assessments
+                    </button>
+                    <button class="btn btn-outline" onclick="reviewTestAnswers('html-professional-test')">
+                        <i class="fas fa-redo"></i> Review Answers
+                    </button>
+                    <button class="btn btn-success" onclick="downloadCertificate()">
+                        <i class="fas fa-download"></i> Download Certificate
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Answers Page -->
+        <div class="page" id="review-page">
+            <div class="review-container">
+                <div class="page-header">
+                    <h2>Answer Review</h2>
+                    <p>Review your answers and learn from mistakes</p>
+                </div>
+
+                <div class="review-summary">
+                    <div class="summary-card correct">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="summary-content">
+                            <div class="summary-count" id="correct-count">0</div>
+                            <div class="summary-label">Correct</div>
+                        </div>
+                    </div>
+                    <div class="summary-card incorrect">
+                        <i class="fas fa-times-circle"></i>
+                        <div class="summary-content">
+                            <div class="summary-count" id="incorrect-count">0</div>
+                            <div class="summary-label">Incorrect</div>
+                        </div>
+                    </div>
+                    <div class="summary-card score">
+                        <i class="fas fa-star"></i>
+                        <div class="summary-content">
+                            <div class="summary-count" id="review-score">0/30</div>
+                            <div class="summary-label">Final Score</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-questions" id="review-questions-container">
+                    <!-- Review questions will be loaded here -->
+                </div>
+
+                <div class="review-actions">
+                    <button class="btn" onclick="showPage('tests-dashboard')">
+                        <i class="fas fa-home"></i> Back to Assessments
+                    </button>
+                    <button class="btn btn-success" onclick="showPage('results-page')">
+                        <i class="fas fa-chart-bar"></i> View Results Summary
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Confirmation Modal -->
+    <div class="modal" id="submit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Submit Assessment</h3>
+                <button class="modal-close" onclick="closeSubmitConfirmation()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to submit your assessment?</p>
+                <div class="submission-stats">
+                    <div class="stat-item">
+                        <span>Questions Answered:</span>
+                        <strong id="answered-count">0</strong>
+                    </div>
+                    <div class="stat-item">
+                        <span>Questions Remaining:</span>
+                        <strong id="remaining-count">30</strong>
+                    </div>
+                </div>
+                <p class="warning-text">You cannot change your answers after submission.</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeSubmitConfirmation()">Continue Assessment</button>
+                <button class="btn btn-success" onclick="submitTest()">Submit Assessment</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+        const sideMenu = document.getElementById('sideMenu');
+        const mainContent = document.getElementById('mainContent');
+
+        if (menuBtn && sideMenu) {
+            menuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sideMenu.classList.toggle('active');
+                mainContent.classList.toggle('expanded');
+            });
+
+            // Close side menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!sideMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                    sideMenu.classList.remove('active');
+                    mainContent.classList.remove('expanded');
+                }
+            });
+        }
+    // Simple menu toggle - with click outside to close
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Script loaded');
+        
+        
+
+        // User dropdown functionality
+        const userButton = document.getElementById('user-button');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        if (userButton && dropdownMenu) {
+            userButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function() {
+                dropdownMenu.style.display = 'none';
+            });
+        }
+
+        // Menu item redirect functionality
+        const menuItems = document.querySelectorAll('.menu-item[data-redirect]');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const redirectUrl = this.getAttribute('data-redirect');
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                }
+            });
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+            themeToggle.checked = savedDarkMode;
+            document.body.classList.toggle('dark-mode', savedDarkMode);
+
+            themeToggle.addEventListener('change', function() {
+                document.body.classList.toggle('dark-mode', this.checked);
+                localStorage.setItem('darkMode', this.checked);
+            });
+        }
+    });
+</script>
+    <script>
+    // Force reset test data on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Clear any existing test data
+        localStorage.removeItem('html-professional-test-completed');
+        localStorage.removeItem('html-professional-test-score');
+        localStorage.removeItem('html-professional-test-answers');
+        localStorage.removeItem('html-professional-test-time');
+        localStorage.removeItem('html-professional-test-date');
+        localStorage.removeItem('currentTestData');
+        localStorage.removeItem('testInProgress');
+        
+        // Ensure available test is shown
+        const completedTest = document.getElementById('completed-test');
+        const availableTest = document.querySelector('.test-card.available');
+        
+        if (completedTest) completedTest.style.display = 'none';
+        if (availableTest) availableTest.style.display = 'block';
+        
+        console.log('Test system reset complete - ready for new attempt');
+    });
+
+</script>
+
+
+<script src="src/test.js"></script>
+
+
+</body>
+</html>
